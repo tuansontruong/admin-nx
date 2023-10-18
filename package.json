@@ -2,15 +2,25 @@
   "name": "admin-nx",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev:admin": "nx dev web",
+    "build:admin": "nx build web",
+    "dev:server": "nx dev api",
+    "build:server": "nx build api",
+    "build:all": "nx run-many --target build"
+  },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
     "@nx/js": "16.10.0",
+    "nodemon": "^3.0.1",
     "nx": "16.10.0",
-    "nx-cloud": "latest"
+    "nx-cloud": "latest",
+    "ts-node": "^10.9.1"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "volta": {
+    "node": "16.20.2"
+  }
 }
