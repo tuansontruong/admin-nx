@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev:admin": "nx dev web",
-    "build:admin": "nx build web",
-    "dev:server": "nx dev api",
-    "build:server": "nx build api",
+    "dev:admin": "nx run web:dev",
+    "build:admin": "nx run web:build",
+    "dev:server": "nx run api:dev",
+    "build:server": "nx run api:build",
     "build:all": "nx run-many --target build"
   },
   "private": true,
@@ -15,7 +15,8 @@
     "nodemon": "^3.0.1",
     "nx": "16.10.0",
     "nx-cloud": "latest",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   },
   "workspaces": [
     "packages/*"
