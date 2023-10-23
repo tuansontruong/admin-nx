@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import { checkJWT, checkPermissions } from "./lib/authenticator";
 import { login } from "./apps/login";
+import { roles } from "./apps/roles";
 
-require('dotenv').config();
+require("dotenv").config();
 const bodyParser = require("body-parser");
 
 /******************** INIT SERVER ********************/
@@ -21,15 +22,13 @@ app.use(
 app.get(
   "/",
   checkJWT,
-  checkPermissions(["read:users", "write:users"], {
-    customScopeKey: "permissions",
-    customUserKey: "auth",
-  }),
+  checkPermissions(["read:users", "write:users"]),
   (req: Request, res: Response) => {
     res.send("Hello, TypeScript Express!");
   }
 );
-app.use('/api/login', login);
+app.use("/api/login", login);
+app.use("/public/roles", roles)
 
 /* ******************* START SERVER ******************* */
 const port = process.env.PORT || 3000;
