@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { checkJWT, checkPermissions } from "./lib/authenticator";
 import { login } from "./apps/login";
+import { roles } from "./apps/roles";
 
 require("dotenv").config();
 const bodyParser = require("body-parser");
@@ -27,6 +28,7 @@ app.get(
   }
 );
 app.use("/api/login", login);
+app.use("/public/roles", roles)
 
 /* ******************* START SERVER ******************* */
 const port = process.env.PORT || 3000;
