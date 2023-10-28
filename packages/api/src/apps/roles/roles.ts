@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import { management } from "../../lib/authenticator";
-const axios = require("axios");
 
 const router = express.Router();
 
