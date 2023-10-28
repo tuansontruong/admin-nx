@@ -28,7 +28,7 @@ app.get(
   }
 );
 app.use("/api/login", login);
-app.use("/public/roles", roles)
+app.use("/api/roles", roles)
 
 /* ******************* START SERVER ******************* */
 const port = process.env.PORT || 3000;
