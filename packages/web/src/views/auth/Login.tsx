@@ -1,4 +1,4 @@
-export default function Login() {
+export const Login = () => {
   return (
     <>
       <main>
@@ -125,4 +125,4 @@ export default function Login() {
       </main>
     </>
   );
-}
+};
