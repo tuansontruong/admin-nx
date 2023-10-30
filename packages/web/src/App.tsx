@@ -1,11 +1,8 @@
-import Login from "./views/auth/Login";
+import { useParams } from "react-router-dom";
 
 function App() {
-  return (
-    <>
-      <Login />
-    </>
-  );
+  const params = useParams();
+  return <>test</>;
 }
 
 export default App;
