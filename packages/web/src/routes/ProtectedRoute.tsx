@@ -12,13 +12,34 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to={PATHS.LOGIN_PATH} />;
   }
 
-  //call api to validate access token;
-  const isAccessTokenValidated = true;
+  // const { permissions, isAccessTokenValidated } =
+  //   validateAccessToken(accessToken);
 
-  if (!isAccessTokenValidated) {
-    localStorage.removeItem("access_token");
-    return <Navigate to={PATHS.LOGIN_PATH} />;
-  }
+  // if (!isAccessTokenValidated) {
+  //   localStorage.removeItem("access_token");
+  //   return <Navigate to={PATHS.LOGIN_PATH} />;
+  // }
 
   return children;
+};
+
+const validateAccessToken = async (
+  accessToken: string
+): Promise<{ permissions: any; isAccessTokenValidated: boolean }> => {
+  const response = await fetch("http://localhost:3000/validate-token", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  const data = await response.json();
+  if (data.status === "success") {
+    return {
+      permissions: data.permissions,
+      isAccessTokenValidated: true,
+    };
+  }
+  return {
+    permissions: null,
+    isAccessTokenValidated: false,
+  };
 };

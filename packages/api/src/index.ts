@@ -1,9 +1,12 @@
 import express, { Request, Response } from "express";
+import { Request as JWTRequest } from "express-jwt";
 import { checkJWT, checkPermissions } from "./lib/authenticator";
 import { login } from "./apps/login";
 import { roles } from "./apps/roles";
+import { errorHandler } from "./middlewares";
 
 require("dotenv").config();
+var cors = require("cors");
 const bodyParser = require("body-parser");
 
 /******************** INIT SERVER ********************/
@@ -17,18 +20,30 @@ app.use(
     extended: true,
   })
 );
+app.use(cors());
 
 /* ******************* INTERNAL API ******************* */
-app.get(
-  "/",
-  checkJWT,
-  checkPermissions(["read:users", "write:users"]),
-  (req: Request, res: Response) => {
-    res.send("Hello, TypeScript Express!");
-  }
-);
+// app.get(
+//   "/",
+//   checkJWT,
+//   checkPermissions(["read:users", "write:users"]),
+//   (err: Error, req: JWTRequest, res: Response) => {
+//     if(err.name === "UnauthorizedError") {
+//       res.status(401).send("invalid token...");
+//     }
+//     res.send(req.auth);
+//   }
+// );
+
+app.get("/validate-token", checkJWT, (req: JWTRequest, res: Response) => {
+  res.send(req.auth);
+});
+
 app.use("/api/login", login);
-app.use("/api/roles", roles)
+app.use("/api/roles", roles);
+
+/* ******************* ERROR HANDLER ******************* */
+app.use(errorHandler);
 
 /* ******************* START SERVER ******************* */
 const port = process.env.PORT || 3000;
