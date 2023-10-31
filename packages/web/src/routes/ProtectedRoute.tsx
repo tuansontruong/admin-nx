@@ -1,8 +1,9 @@
 import { Navigate } from "react-router-dom";
-import { PATHS } from "./routes";
+import { cloneElement, useEffect, useState } from "react";
+import { PATHS } from "./constants";
 
 interface ProtectedRouteProps {
-  children: React.ReactNode;
+  children: React.ReactElement;
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
@@ -12,34 +13,34 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to={PATHS.LOGIN_PATH} />;
   }
 
-  // const { permissions, isAccessTokenValidated } =
-  //   validateAccessToken(accessToken);
+  const [permissions, setPersmission] = useState(null);
+  const [isValidating, setIsValidating] = useState(true);
 
-  // if (!isAccessTokenValidated) {
-  //   localStorage.removeItem("access_token");
-  //   return <Navigate to={PATHS.LOGIN_PATH} />;
-  // }
+  useEffect(() => {
+    const validateToken = async () => {
+      const tokenPromise = await fetch("http://localhost:3000/validate-token", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await tokenPromise.json();
 
-  return children;
-};
-
-const validateAccessToken = async (
-  accessToken: string
-): Promise<{ permissions: any; isAccessTokenValidated: boolean }> => {
-  const response = await fetch("http://localhost:3000/validate-token", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  const data = await response.json();
-  if (data.status === "success") {
-    return {
-      permissions: data.permissions,
-      isAccessTokenValidated: true,
+      if (tokenPromise.status === 200 && data.permissions?.length) {
+        setPersmission(data.permissions);
+      }
+      setIsValidating(false);
     };
+    validateToken();
+  }, []);
+
+  if (isValidating) {
+    return <div>Validating...</div>;
   }
-  return {
-    permissions: null,
-    isAccessTokenValidated: false,
-  };
+
+  if (!permissions) {
+    localStorage.removeItem("access_token");
+    return <Navigate to={PATHS.LOGIN_PATH} />;
+  }
+
+  return cloneElement(children, { permissions });
 };

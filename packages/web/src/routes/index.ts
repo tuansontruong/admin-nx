@@ -1,2 +1,2 @@
 export { router } from "./router";
-export { PATHS } from "./routes";
+export { PATHS } from "./constants";

@@ -1,8 +1,11 @@
-import { useParams } from "react-router-dom";
-
-function App() {
-  const params = useParams();
-  return <>test</>;
+function App({ permissions }: { permissions?: string[] }) {
+  return (
+    <>
+      {permissions?.map((permission, index) => (
+        <div key={index}>{permission}</div>
+      ))}
+    </>
+  );
 }
 
 export default App;
