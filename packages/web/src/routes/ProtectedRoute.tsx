@@ -1,6 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { cloneElement, useEffect, useState } from "react";
+
 import { PATHS } from "./constants";
+import { validateToken } from "./ProtectedRoute.service";
+import { LoadingSpinner } from "../components";
 
 interface ProtectedRouteProps {
   children: React.ReactElement;
@@ -13,33 +16,21 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to={PATHS.LOGIN_PATH} />;
   }
 
-  const [permissions, setPersmission] = useState(null);
-  const [isValidating, setIsValidating] = useState(true);
+  const [permissions, setPersmissions] = useState<{} | null>(null);
 
   useEffect(() => {
-    const validateToken = async () => {
-      const tokenPromise = await fetch("http://localhost:3000/validate-token", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+    validateToken()
+      .then(
+        (res) => new Promise((resolve) => setTimeout(() => resolve(res), 1500))
+      )
+      .then((res) => {
+        if (!res) window.location.href = PATHS.LOGIN_PATH;
+        else setPersmissions(res);
       });
-      const data = await tokenPromise.json();
-
-      if (tokenPromise.status === 200 && data.permissions?.length) {
-        setPersmission(data.permissions);
-      }
-      setIsValidating(false);
-    };
-    validateToken();
   }, []);
 
-  if (isValidating) {
-    return <div>Validating...</div>;
-  }
-
   if (!permissions) {
-    localStorage.removeItem("access_token");
-    return <Navigate to={PATHS.LOGIN_PATH} />;
+    return <LoadingSpinner />;
   }
 
   return cloneElement(children, { permissions });
