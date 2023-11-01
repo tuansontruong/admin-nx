@@ -46,7 +46,7 @@ app.use("/api/roles", roles);
 app.use(errorHandler);
 
 /* ******************* START SERVER ******************* */
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 app.listen(port, () => {
   console.log(`Server running attt http://localhost:${port}`);
 });
