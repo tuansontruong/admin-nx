@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { AxiosError } from "../exceptions";
 
 export const errorHandler = (
   err: Error,
@@ -8,6 +9,13 @@ export const errorHandler = (
 ) => {
   if (err.name === "UnauthorizedError") {
     res.status(401).send({ permissions: null });
+  }
+
+  if (err instanceof AxiosError) {
+    res.status(err.statusCode).json({
+      message: err.message,
+    });
+    return;
   }
 
   //   uncaught error
