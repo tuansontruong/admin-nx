@@ -1,13 +1,9 @@
-import { useState } from "react";
-import { postLogin } from "./login.fetcher";
+import { Button } from "../../commons/Button/Button";
+import { useLogin } from "./useLogin";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const onLogin = async () => {
-    const data = await postLogin({ username: email, password });
-  };
+  const { email, setEmail, password, setPassword, onLogin, isLoading, error } =
+    useLogin();
 
   return (
     <>
@@ -92,7 +88,10 @@ export const Login = () => {
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
-                      <div>
+                      {error && (
+                        <h2 className=" text-red-600 text-center">{error}</h2>
+                      )}
+                      {/* <div>
                         <label className="inline-flex items-center cursor-pointer">
                           <input
                             id="customCheckLogin"
@@ -103,16 +102,14 @@ export const Login = () => {
                             Remember me
                           </span>
                         </label>
-                      </div>
+                      </div> */}
 
                       <div className="text-center mt-6">
-                        <button
-                          className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                          type="button"
+                        <Button
                           onClick={onLogin}
-                        >
-                          Sign In
-                        </button>
+                          isLoading={isLoading}
+                          text={"Sign In"}
+                        />
                       </div>
                     </form>
                   </div>

@@ -3,7 +3,7 @@ import { cloneElement, useEffect, useState } from "react";
 
 import { PATHS } from "./constants";
 import { validateToken } from "./ProtectedRoute.service";
-import { LoadingSpinner } from "../components";
+import { LoadingSpinner } from "../commons";
 
 interface ProtectedRouteProps {
   children: React.ReactElement;

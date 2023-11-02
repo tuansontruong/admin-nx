@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { AxiosError } from "../exceptions";
+import { NextFunction, Request, Response } from "express";
+import { AxiosError, BaseError } from "../exceptions";
 
 export const errorHandler = (
   err: Error,
@@ -14,6 +14,14 @@ export const errorHandler = (
   if (err instanceof AxiosError) {
     res.status(err.statusCode).json({
       message: err.message,
+    });
+    return;
+  }
+
+  if (err instanceof BaseError) {
+    const { message, statusCode = 400 } = err;
+    res.status(statusCode).json({
+      message,
     });
     return;
   }
