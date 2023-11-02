@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: `http://localhost:3002`,
+  baseURL: import.meta.env.VITE_BACKEND_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

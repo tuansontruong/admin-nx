@@ -1,20 +1,18 @@
 import express, { NextFunction, Request, Response } from "express";
-import { oAuth } from "../../lib/authenticator";
-import { AxiosError } from "../../exceptions";
-import { errorHandler } from "../../middlewares";
+import { BaseError } from "../../exceptions";
+import { loginFetcher } from "./login.fetcher";
 const router = express.Router();
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const { username, password } = req.body;
   try {
-    const { data } = await oAuth.passwordGrant({
-      username,
-      password,
-      audience: process.env.AUTH0_AUDIENCE,
-    });
-    return res.status(200).json(data);
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new BaseError("Email and Password are required", 400);
+    }
+    const userCredentials = await loginFetcher({ username, password });
+    return res.status(200).json(userCredentials);
   } catch (error) {
-    next(new AxiosError(error));
+    next(error);
   }
 });
 

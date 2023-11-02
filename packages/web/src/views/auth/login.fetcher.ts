@@ -1,4 +1,4 @@
-import axiosClient from "../../utils/apiClient";
+import axiosClient from "../../axios/apiClient";
 
 interface PostLoginRequest {
   username: string;
