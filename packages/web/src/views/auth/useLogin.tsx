@@ -14,8 +14,14 @@ export const useLogin = () => {
   const [error, setError] = useState<null | string>(null);
 
   const onLogin = async () => {
-    setIsLoading(true);
+    if (!email || !password) {
+      setError("Email and Password are required");
+      return;
+    }
+
     try {
+      setIsLoading(true);
+
       const data = await loginUser(email, password);
 
       window.localStorage.setItem("access_token", data.access_token);
