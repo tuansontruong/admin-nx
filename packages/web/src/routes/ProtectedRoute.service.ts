@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
-import axiosClient from "../axios/apiClient";
+
+import { axiosClient } from "@axios";
 
 export const validateToken = async () => {
   try {

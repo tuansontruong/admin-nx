@@ -1,11 +1,10 @@
 import { RouteObject } from "react-router-dom";
 
-import { PATHS } from "./constants";
+import { Users, Login } from "@views";
 
-// routes configs
 import App from "../App";
+import { PATHS } from "./constants";
 import { ProtectedRoute } from "./ProtectedRoute";
-import { Users, Login } from "../views";
 
 const LoginRoute: RouteObject = {
   path: PATHS.LOGIN_PATH,

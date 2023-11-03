@@ -1,4 +1,4 @@
-import { Button } from "../../commons/Button/Button";
+import { Button } from "@commons";
 import { useLogin } from "./useLogin";
 
 export const Login = () => {
