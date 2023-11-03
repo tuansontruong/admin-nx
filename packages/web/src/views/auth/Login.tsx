@@ -1,5 +1,5 @@
-import { Button } from "@commons";
-import { useLogin } from "./useLogin";
+import { useLogin } from './useLogin';
+import { Button } from '@commons';
 
 export const Login = () => {
   const { email, setEmail, password, setPassword, onLogin, isLoading, error } =
@@ -12,7 +12,7 @@ export const Login = () => {
           <div
             className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
             style={{
-              backgroundImage: "url(register_bg_2.png)",
+              backgroundImage: 'url(register_bg_2.png)',
             }}
           ></div>
           {/* LOGIN SECTION */}
@@ -34,7 +34,7 @@ export const Login = () => {
                         <img
                           alt="..."
                           className="w-5 mr-1"
-                          src={"github.svg"}
+                          src={'github.svg'}
                         />
                         Github
                       </button>
@@ -45,7 +45,7 @@ export const Login = () => {
                         <img
                           alt="..."
                           className="w-5 mr-1"
-                          src={"google.svg"}
+                          src={'google.svg'}
                         />
                         Google
                       </button>
@@ -108,7 +108,7 @@ export const Login = () => {
                         <Button
                           onClick={onLogin}
                           isLoading={isLoading}
-                          text={"Sign In"}
+                          text={'Sign In'}
                         />
                       </div>
                     </form>
