@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { PATHS } from "@routes";
+import { APIError } from "@axios";
+
 import { loginUser } from "./login.service";
-import { PATHS } from "../../routes";
-import APIError from "../../axios/APIError";
 
 export const useLogin = () => {
   const navigate = useNavigate();
