@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { cloneElement, useEffect, useState } from "react";
+import { LoadingSpinner } from "@commons";
 
 import { PATHS } from "./constants";
 import { validateToken } from "./ProtectedRoute.service";
-import { LoadingSpinner } from "../commons";
 
 interface ProtectedRouteProps {
   children: React.ReactElement;

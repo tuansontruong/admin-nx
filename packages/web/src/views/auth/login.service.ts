@@ -1,5 +1,7 @@
 import { AxiosError } from "axios";
-import APIError from "../../axios/APIError";
+
+import { APIError } from "@axios";
+
 import { postLogin } from "./login.fetcher";
 
 export const loginUser = async (

@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
-const axiosClient = axios.create({
+export const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   headers: {
     Accept: "application/json",
@@ -28,5 +28,3 @@ axiosClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default axiosClient;
