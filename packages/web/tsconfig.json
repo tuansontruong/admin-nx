@@ -23,7 +23,8 @@
       "@axios": ["./src/axios"],
       "@commons": ["./src/commons"],
       "@routes": ["./src/routes"],
-      "@views": ["./src/views"]
+      "@views": ["./src/views"],
+      "@components": ["./src/components"],
     }
   },
   "include": ["src"],

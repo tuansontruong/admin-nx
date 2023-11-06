@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { cloneElement, useEffect, useState } from 'react';
-import { LoadingSpinner } from '@commons';
+import { LoadingSpinner } from '../components';
 
 import { PATHS } from './constants';
 import { validateToken } from './ProtectedRoute.service';
@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const [permissions, setPersmissions] = useState<object>();
+  const [roles, setRoles] = useState<object>();
 
   useEffect(() => {
     validateToken()
@@ -19,7 +19,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       )
       .then((res) => {
         if (!res) window.location.href = PATHS.LOGIN_PATH;
-        else setPersmissions(res);
+        else setRoles(res);
       });
   }, []);
 
@@ -29,9 +29,9 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to={PATHS.LOGIN_PATH} />;
   }
 
-  if (!permissions) {
+  if (!roles) {
     return <LoadingSpinner />;
   }
 
-  return cloneElement(children, { permissions });
+  return cloneElement(children, { roles });
 };
