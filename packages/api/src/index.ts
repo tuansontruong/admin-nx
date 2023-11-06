@@ -1,6 +1,6 @@
-import express, { Request, Response } from "express";
+import express, { Response } from "express";
 import { Request as JWTRequest } from "express-jwt";
-import { checkJWT, checkPermissions } from "./lib/authenticator";
+import { checkJWT } from "./lib/authenticator";
 import { login } from "./apps/login";
 import { roles } from "./apps/roles";
 import { errorHandler } from "./middlewares";
@@ -36,7 +36,19 @@ app.use(cors());
 // );
 
 app.get("/validate-token", checkJWT, (req: JWTRequest, res: Response) => {
-  res.send(req.auth);
+  let roles: string[] = [];
+
+  // just return needed data
+  if (req.auth) {
+    roles = req.auth[`${process.env.AUTH0_AUDIENCE}/roles`].map(
+      (role: string) => role.toLowerCase()
+    );
+    delete req.auth[`${process.env.AUTH0_AUDIENCE}/roles`];
+    delete req.auth["permissions"];
+  }
+
+  const creds = { ...req.auth, roles: roles };
+  res.send(creds);
 });
 
 app.use("/api/login", login);
