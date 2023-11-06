@@ -9,8 +9,8 @@ import { loginUser } from "./login.service";
 export const useLogin = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("vmxyflnsgtfl@internetkeno.com");
+  const [password, setPassword] = useState("Tts2610@");
   const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState<null | string>(null);
