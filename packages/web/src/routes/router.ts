@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
-import { AppRoute, LoginRoute, UserRoute } from "./routes";
+import { createBrowserRouter } from 'react-router-dom';
+import { AppRoute, LoginRoute } from './routes';
 
-export const router = createBrowserRouter([AppRoute, LoginRoute, UserRoute]);
+export const router = createBrowserRouter([AppRoute, LoginRoute]);

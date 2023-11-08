@@ -1,10 +1,10 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject } from 'react-router-dom';
 
-import { Users, Login } from "@views";
+import { Users, Login, Dashboard } from '@views';
 
-import App from "../App";
-import { PATHS } from "./constants";
-import { ProtectedRoute } from "./ProtectedRoute";
+import App from '../App';
+import { PATHS } from './constants';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const LoginRoute: RouteObject = {
   path: PATHS.LOGIN_PATH,
@@ -21,14 +21,23 @@ const UserRoute: RouteObject = {
   ),
 };
 
+const DashboardRoute: RouteObject = {
+  path: PATHS.DASH_BOARD_PATH,
+  element: (
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  ),
+};
+
 const AppRoute: RouteObject = {
   path: PATHS.APP_PATH,
   element: (
     <ProtectedRoute>
-      <App />
+      <App roles={['']} />
     </ProtectedRoute>
   ),
-  //   children: [UserRoute],
+  children: [DashboardRoute, UserRoute],
 };
 
-export { LoginRoute, AppRoute, UserRoute };
+export { LoginRoute, AppRoute };
