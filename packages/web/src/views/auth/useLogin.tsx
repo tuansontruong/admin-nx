@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { PATHS } from "@routes";
-import { APIError } from "@axios";
+import { PATHS } from '@routes';
+import { APIError } from '@axios';
 
-import { loginUser } from "./login.service";
+import { loginUser } from './login.service';
 
 export const useLogin = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("vmxyflnsgtfl@internetkeno.com");
-  const [password, setPassword] = useState("Tts2610@");
+  const [email, setEmail] = useState('vmxyflnsgtfl@internetkeno.com');
+  const [password, setPassword] = useState('Tts2610@');
   const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState<null | string>(null);
 
   const onLogin = async () => {
     if (!email || !password) {
-      setError("Email and Password are required");
+      setError('Email and Password are required');
       return;
     }
 
@@ -26,9 +26,9 @@ export const useLogin = () => {
 
       const data = await loginUser(email, password);
 
-      window.localStorage.setItem("access_token", data.access_token);
+      window.localStorage.setItem('access_token', data.access_token);
 
-      navigate(PATHS.APP_PATH);
+      navigate(PATHS.DASH_BOARD_PATH);
     } catch (error) {
       if (error instanceof APIError) {
         setError(error.message);

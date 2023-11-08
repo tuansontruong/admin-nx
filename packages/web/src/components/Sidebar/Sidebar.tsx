@@ -1,16 +1,20 @@
 /*eslint-disable*/
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import NotificationDropdown from '../Dropdowns/NotificationDropdown';
 import UserDropdown from '../Dropdowns/UserDropdown';
 import { useSidebarAuthorization } from './useSidebarAuthorization';
 import { useUserConfig } from '../../commons/providers';
+import { PATHS } from '../../routes/constants';
 
 export const Sidebar = () => {
   const [collapseShow, setCollapseShow] = React.useState('hidden');
   const userConfig = useUserConfig();
   const authorization = useSidebarAuthorization(userConfig.roles);
+  let location = useLocation();
+
+  useEffect(() => {}, [location]);
 
   return (
     <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -93,16 +97,16 @@ export const Sidebar = () => {
                 <Link
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/dashboard') !== -1
+                    (location.pathname === PATHS.DASH_BOARD_PATH
                       ? 'text-lightBlue-500 hover:text-lightBlue-600'
                       : 'text-blueGray-700 hover:text-blueGray-500')
                   }
-                  to="/admin/dashboard"
+                  to={PATHS.DASH_BOARD_PATH}
                 >
                   <i
                     className={
-                      'fas fa-tv mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/dashboard') !== -1
+                      'fas fa-tv mr-1 text-sm ' +
+                      (location.pathname === PATHS.DASH_BOARD_PATH
                         ? 'opacity-75'
                         : 'text-blueGray-300')
                     }
@@ -141,16 +145,16 @@ export const Sidebar = () => {
                 <Link
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/tables') !== -1
+                    (location.pathname === PATHS.USER_PATH
                       ? 'text-lightBlue-500 hover:text-lightBlue-600'
                       : 'text-blueGray-700 hover:text-blueGray-500')
                   }
-                  to="/admin/tables"
+                  to={PATHS.USER_PATH}
                 >
                   <i
                     className={
-                      'fas fa-table mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/tables') !== -1
+                      'fas fa-table mr-1 text-sm ' +
+                      (location.pathname === PATHS.USER_PATH
                         ? 'opacity-75'
                         : 'text-blueGray-300')
                     }
@@ -184,7 +188,7 @@ export const Sidebar = () => {
               </li>
             )}
 
-            {authorization.orders && (
+            {authorization.products && (
               <li className="items-center">
                 <Link
                   className={
@@ -197,12 +201,12 @@ export const Sidebar = () => {
                 >
                   <i
                     className={
-                      'fas fa-map-marked mr-2 text-sm' +
+                      'fas fa-paperclip mr-2 text-sm ' +
                       (window.location.href.indexOf('/admin/tables') !== -1
                         ? 'opacity-75'
                         : 'text-blueGray-300')
                     }
-                  ></i>{' '}
+                  ></i>
                   Orders
                 </Link>
               </li>

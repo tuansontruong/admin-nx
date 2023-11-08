@@ -1,3 +1,2 @@
-export { Login } from "./auth";
-
-export { Users } from "./app";
+export * from './auth';
+export * from './app';
