@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 
 interface IUserConfig {
   userConfig: {
-    roles?: string[];
+    roles: string[];
   };
   children: React.ReactNode;
 }
 
-const UserConfigContext = React.createContext({});
+const UserConfigContext = React.createContext({ roles: [''] });
 
 export const UserConfigProvider = ({ userConfig, children }: IUserConfig) => {
   return (
@@ -17,7 +17,7 @@ export const UserConfigProvider = ({ userConfig, children }: IUserConfig) => {
   );
 };
 
-export const useUserConfig = () => {
-  const routerConfig = useContext(UserConfigContext);
-  return routerConfig;
+export const useUserConfig = (): { roles: string[] } => {
+  const userConfig = useContext(UserConfigContext);
+  return userConfig;
 };

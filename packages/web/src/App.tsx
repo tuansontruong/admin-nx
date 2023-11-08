@@ -1,7 +1,7 @@
 import { UserConfigProvider } from './commons/providers';
 import { Sidebar } from './components/Sidebar/Sidebar';
 
-function App({ roles }: { roles?: string[] }) {
+function App({ roles }: { roles: string[] }) {
   return (
     <UserConfigProvider userConfig={{ roles }}>
       {/* App
