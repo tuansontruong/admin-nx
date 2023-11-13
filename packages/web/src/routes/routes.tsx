@@ -5,13 +5,17 @@ import { Users, Login, Dashboard } from '@views';
 import App from '../App';
 import { PATHS } from './constants';
 import { ProtectedRoute } from './ProtectedRoute';
+import { NavigateRoute } from './NavigateRoute';
 
 const LoginRoute: RouteObject = {
   path: PATHS.LOGIN_PATH,
-  element: <Login />,
+  element: (
+    <NavigateRoute>
+      <Login />
+    </NavigateRoute>
+  ),
 };
 
-// TODO: put this route as child of AppRoute after styling the sidebar
 const UserRoute: RouteObject = {
   path: PATHS.USER_PATH,
   element: (
@@ -24,9 +28,9 @@ const UserRoute: RouteObject = {
 const DashboardRoute: RouteObject = {
   path: PATHS.DASH_BOARD_PATH,
   element: (
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
+    // <ProtectedRoute>
+    <Dashboard />
+    // </ProtectedRoute>
   ),
 };
 
