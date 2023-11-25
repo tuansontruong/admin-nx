@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 
-import { Users, Login, Dashboard } from '@views';
+import { Users, Login, Dashboard, Products } from '@views';
 
 import App from '../App';
 import { PATHS } from './constants';
@@ -16,14 +16,14 @@ const LoginRoute: RouteObject = {
   ),
 };
 
-const UserRoute: RouteObject = {
-  path: PATHS.USER_PATH,
-  element: (
-    <ProtectedRoute>
-      <Users />
-    </ProtectedRoute>
-  ),
-};
+// const UserRoute: RouteObject = {
+//   path: PATHS.USER_PATH,
+//   element: (
+//     <ProtectedRoute>
+//       <Users />
+//     </ProtectedRoute>
+//   ),
+// };
 
 const DashboardRoute: RouteObject = {
   path: PATHS.DASH_BOARD_PATH,
@@ -34,6 +34,15 @@ const DashboardRoute: RouteObject = {
   ),
 };
 
+const ProductsRoute: RouteObject = {
+  path: PATHS.PRODUCT_PATH,
+  element: (
+    <ProtectedRoute>
+      <Products />
+    </ProtectedRoute>
+  ),
+};
+
 const AppRoute: RouteObject = {
   path: PATHS.APP_PATH,
   element: (
@@ -41,7 +50,7 @@ const AppRoute: RouteObject = {
       <App roles={['']} />
     </ProtectedRoute>
   ),
-  children: [DashboardRoute, UserRoute],
+  children: [DashboardRoute, ProductsRoute],
 };
 
 export { LoginRoute, AppRoute };

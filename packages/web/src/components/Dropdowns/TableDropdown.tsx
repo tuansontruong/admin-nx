@@ -1,14 +1,14 @@
-import React from "react";
-import { createPopper } from "@popperjs/core";
+import React from 'react';
+import { createPopper } from '@popperjs/core';
 
-const NotificationDropdown = () => {
+const TableDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
+  const btnDropdownRef = React.createRef<any>();
+  const popoverDropdownRef = React.createRef<any>();
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "left-start",
+      placement: 'left-start',
     });
     setDropdownPopoverShow(true);
   };
@@ -31,14 +31,14 @@ const NotificationDropdown = () => {
       <div
         ref={popoverDropdownRef}
         className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+          (dropdownPopoverShow ? 'block ' : 'hidden ') +
+          'bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48'
         }
       >
         <a
           href="#pablo"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -47,7 +47,7 @@ const NotificationDropdown = () => {
         <a
           href="#pablo"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -56,7 +56,7 @@ const NotificationDropdown = () => {
         <a
           href="#pablo"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -67,4 +67,4 @@ const NotificationDropdown = () => {
   );
 };
 
-export default NotificationDropdown;
+export { TableDropdown };
