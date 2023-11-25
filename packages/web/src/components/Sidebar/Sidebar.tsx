@@ -140,7 +140,7 @@ export const Sidebar = () => {
               </li>
             )} */}
 
-            {authorization.users && (
+            {/* {authorization.users && (
               <li className="items-center">
                 <Link
                   className={
@@ -162,23 +162,23 @@ export const Sidebar = () => {
                   Users
                 </Link>
               </li>
-            )}
+            )} */}
 
             {authorization.products && (
               <li className="items-center">
                 <Link
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/tables') !== -1
+                    (location.pathname === PATHS.PRODUCT_PATH
                       ? 'text-lightBlue-500 hover:text-lightBlue-600'
                       : 'text-blueGray-700 hover:text-blueGray-500')
                   }
-                  to="/admin/tables"
+                  to={PATHS.PRODUCT_PATH}
                 >
                   <i
                     className={
                       'fas fa-clipboard-list mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/tables') !== -1
+                      (location.pathname === PATHS.PRODUCT_PATH
                         ? 'opacity-75'
                         : 'text-blueGray-300')
                     }
